@@ -1,10 +1,12 @@
 
 public class Conta {
-	String nome,agencia,dataAbertura;
-	int numeroConta = 0;
-	double saldo = 0;
+	String nome,agencia;
+	Data dataAbertura=new Data();
+	int numeroConta;
+	double saldo;
 	public void imprimeCadastro() {
-		System.out.printf("Nome do cliente: %s    Cliente desde: %s\nNúmero da conta: %d    Agência: %s\n",this.nome,this.dataAbertura,this.numeroConta,this.agencia);
+		String data = Data.formataData(this.dataAbertura.dia,this.dataAbertura.mes,this.dataAbertura.ano);
+		System.out.printf("Nome do cliente: %s    Cliente desde:%s\nAgência: %s  Conta número: %d\n",this.nome,data,this.agencia,this.numeroConta);
 		System.out.printf("Saldo atual: %.2f\n",this.saldo);
 	}
 	public void saque(double v) {
@@ -14,9 +16,9 @@ public class Conta {
 		this.saldo+=v;
 	}
 	public void mostraSaldo() {
-		System.out.println(this.saldo);
+		System.out.println("Saldo atual:"+saldo);
 	}
 	public void calculaRendimento() {
-		this.saldo*=1.1;
+		System.out.println("O rendimento esperado para esse mês é:"+this.saldo*0.1);
 	}
 }
