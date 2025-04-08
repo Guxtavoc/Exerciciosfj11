@@ -7,6 +7,7 @@ public class Conta {
 	Conta(String titular){
 		this.titular=titular;
 	}
+	Conta (){};
 	public void imprimeCadastro() {
 		String data = Data.formataData(this.dataAbertura.dia,this.dataAbertura.mes,this.dataAbertura.ano);
 		System.out.printf("Nome do cliente: %s    Cliente desde:%s\nAgência: %s  Conta número: %d\n",this.titular,data,this.agencia,this.numeroConta);
