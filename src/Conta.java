@@ -2,12 +2,23 @@
 public class Conta {
 	private String titular,agencia;
 	private Data dataAbertura=new Data();
-	private int numeroConta;//Gerar ou deixar o usuario definir?
+	private int numeroConta;
 	private double saldo=0f;
+	private static int identificador = 0;
 	Conta(String titular){
 		this.titular=titular;
 	}
-	Conta (){};
+	Conta (){
+		this.numeroConta=(int)Math.floor(Math.random() * (1000 - 100 + 1) + 100);
+		this.identificador=Conta.setIdentificador();
+	}
+	private static int setIdentificador() {
+		identificador++;
+		return identificador;
+	}
+	public void getIdentificador() {
+		System.out.println("O identificador dessa conta é: "+this.identificador);
+	}
 	public void imprimeCadastro() {
 		String data = Data.formataData(this.dataAbertura.dia,this.dataAbertura.mes,this.dataAbertura.ano);
 		System.out.printf("Nome do cliente: %s    Cliente desde:%s\nAgência: %s  Conta número: %d\n",this.titular,data,this.agencia,this.numeroConta);
