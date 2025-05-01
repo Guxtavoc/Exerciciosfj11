@@ -4,7 +4,7 @@ public class Main {
 		Conta c1 = new Conta();
 		c1.setTitular("Gustavo");
 		c1.setAgencia("Banco Roxo");
-		c1.setData(01, 02, 2003);
+		c1.setData(29, 02, 2000);
 		c1.imprimeCadastro();
 		c1.saque(50f);
 		c1.deposito(50f);

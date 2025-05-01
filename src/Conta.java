@@ -1,5 +1,5 @@
 
-public class Conta {
+public class Conta{
 	private String titular,agencia;
 	private Data dataAbertura=new Data();
 	private int numeroConta;
@@ -51,8 +51,13 @@ public class Conta {
 		this.agencia=agencia;
 	}
 	public void setData(int dia,int mes,int ano) {
-		this.dataAbertura.dia=dia;
-		this.dataAbertura.mes=mes;
-		this.dataAbertura.ano=ano;
+		if(Data.VerificaData(dia, mes, ano)) {
+			this.dataAbertura.dia=dia;
+			this.dataAbertura.mes=mes;
+			this.dataAbertura.ano=ano;
+			System.out.println("Data valida!");//Debug
+		}else {
+			System.out.println("Data invalida!");//Debug. Solicitar a data novamente
+		}
 	}
 }
