@@ -1,25 +1,38 @@
 public class PessoaFisica {
-	private String nome, CPF;
-	
-	PessoaFisica(String Nome,String cpf){
-		this.nome=Nome;
+	public String nome, CPF;
+	private Data aniversario = new Data();
+
+	PessoaFisica(String Nome, String cpf, int dia, int mes, int ano) {// Construtor para "PessoaFisica"
+		this.nome = Nome;
 		setCPF(cpf);
+		Data.VerificaData(dia, mes, ano);
+		aniversario.dia = dia;
+		aniversario.mes = mes;
+		aniversario.ano = ano;
+		if (Data.getIdade(aniversario).getYears() < 18) {
+			System.out.println("Menor de idade!");
+		} else {
+			System.out.println("Maior de idade!");
+		}
+		System.out.println("Idade-> anos:" + Data.getIdade(aniversario).getYears() + " Meses:"
+				+ Data.getIdade(aniversario).getMonths() + " Dias: " + Data.getIdade(aniversario).getDays());
 	}
-	
+
 	public void setCPF(String cpf) {
-		if(PessoaFisica.verifica(cpf)==true) {
+		if (PessoaFisica.verifica(cpf) == true) {
 			System.out.println("CPF valido!");
-			this.CPF=cpf;
-		}else {
+			this.CPF = cpf;
+		} else {
 			System.out.println("CPF invalido");
 		}
 	}
-	
+
 	public String getCPF() {
 		return this.CPF;
 	}
+
 	public static boolean verifica(String original) {
-		if(original.length()!=11) {//Verificação estrutural
+		if (original.length() != 11) {// Verificação estrutural
 			System.out.println("Tamanho Invalido");
 			return false;
 		}
@@ -28,33 +41,32 @@ public class PessoaFisica {
 		char primeiro = original.charAt(0);
 		for (int i = 0; i < cpf.length; i++) {
 			char c = original.charAt(i);
-			if(Character.isDigit(c)) {
+			if (Character.isDigit(c)) {
 				cpf[i] = c - '0';
-				if(primeiro != c) {
+				if (primeiro != c) {
 					igual = false;
 				}
-			}else{
+			} else {
 				System.out.println("Caracter invalido detectado!");
 				return false;
 			}
 		}
-		if(igual == true) {
+		if (igual == true) {
 			System.out.println("O CPF não pode conter 11 números repetidos!");
 			return false;
 		}
-		int acumulado = 0;//Verificação logica
+		int acumulado = 0;// Verificação logica
 		for (int i = 0; i < 9; i++) {
-			acumulado+=cpf[i]*(10-i);
+			acumulado += cpf[i] * (10 - i);
 		}
-		int resto1 = (acumulado*10)%11;
-		acumulado=0;
+		int resto1 = (acumulado * 10) % 11;
+		acumulado = 0;
 		for (int i = 0; i < 10; i++) {
-			acumulado+=cpf[i]*(11-i);
+			acumulado += cpf[i] * (11 - i);
 		}
-		int resto2 = (acumulado*10)%11;
+		int resto2 = (acumulado * 10) % 11;
 		resto1 = (resto1 == 10) ? 0 : resto1;
 		resto2 = (resto2 == 10) ? 0 : resto2;
-		return (resto1==cpf[9]&&resto2==cpf[10]);
+		return (resto1 == cpf[9] && resto2 == cpf[10]);
 	}
 }
-
