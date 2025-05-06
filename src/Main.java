@@ -1,8 +1,7 @@
 
 public class Main {
 	public static void main(String[] args) {
-		Conta c1 = new Conta();
-		c1.setTitular("Gustavo");
+		Conta c1 = new Conta("Gustavo","12345678910");
 		c1.setAgencia("Banco Roxo");
 		c1.setData(29, 02, 2000);
 		c1.imprimeCadastro();

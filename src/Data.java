@@ -10,7 +10,7 @@ public class Data {
 		}
 		if(mes==2){//Caso para fevereiro...Considerar anos bissextos?
 			int max = 28;
-			if(ano%4==0 && ano%100!=0 || ano%400==0) {
+			if(ano%4==0 && (ano%100!=0 || ano%400==0)) {
 				max = 29;
 				System.out.println("é um ano bissexto");//Debug
 			}

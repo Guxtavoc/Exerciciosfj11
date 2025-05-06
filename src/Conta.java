@@ -1,23 +1,30 @@
-
 public class Conta{
+	
 	private String titular,agencia;
+	public String CPF;
+	private PessoaFisica detentor;
 	private Data dataAbertura=new Data();
 	private int numeroConta;
 	private double saldo=0f;
 	private static int identificador = 0;
-	Conta(String titular){
-		this.titular=titular;
+	
+	Conta(String nome, String CPF){
+		identificador=Conta.setIdentificador();
+		this.setTitular(nome);
+		detentor = new PessoaFisica(titular,CPF);
 	}
+	
 	Conta (){
 		this.numeroConta=(int)Math.floor(Math.random() * (1000 - 100 + 1) + 100);
-		this.identificador=Conta.setIdentificador();
+		identificador=Conta.setIdentificador();
 	}
+	
 	private static int setIdentificador() {
-		identificador++;
+		Conta.identificador++;
 		return identificador;
 	}
 	public void getIdentificador() {
-		System.out.println("O identificador dessa conta é: "+this.identificador);
+		System.out.println("O identificador dessa conta é: "+identificador);
 	}
 	public void imprimeCadastro() {
 		String data = Data.formataData(this.dataAbertura.dia,this.dataAbertura.mes,this.dataAbertura.ano);
