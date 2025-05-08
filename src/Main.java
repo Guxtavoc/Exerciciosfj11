@@ -39,6 +39,7 @@ public class Main {
 		}
 	}
 
+	
 	private static int busca(ArrayList<Conta> banco, int id) {
 		for (int i = 0; i < banco.size(); i++) {
 			Conta c = banco.get(i);
