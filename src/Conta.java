@@ -26,15 +26,16 @@ public class Conta {
 	}
 
 	public int getIdentificador() {
-		return this.identificador;
+		return this.ID;
 	}
 
 
 	public void saque(double v) {
-		if (v > this.saldo) {
+		if (v > this.saldo|| v < 0) {
 			System.out.println("Limite insuficiente!");
 			return;
 		}
+		System.out.println("Saque realizado com sucesso!");
 		this.saldo -= v;
 	}
 
@@ -43,6 +44,7 @@ public class Conta {
 			System.out.println("Valor invalido! Tente novamente.");
 			return;
 		}
+		System.out.println("Deposito efetuado com sucesso!");
 		this.saldo += v;
 	}
 
@@ -58,4 +60,12 @@ public class Conta {
 		this.agencia = agencia;
 	}
 
+	public void transferira(Conta b, double valor) {
+		if(this.saldo<valor) {
+			System.out.println("Limite insuficiente!");
+			return;
+		}
+		this.saldo-=valor;
+		b.saldo+=valor;
+	}
 }

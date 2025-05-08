@@ -19,7 +19,7 @@ public class Main {
 				atualizar(banco);
 				break;
 			case 3:
-				// operacoes(banco);
+				operacoes(banco);
 				break;
 			case 4:
 				excluir(banco);
@@ -39,7 +39,6 @@ public class Main {
 		}
 	}
 
-	
 	private static int busca(ArrayList<Conta> banco, int id) {
 		for (int i = 0; i < banco.size(); i++) {
 			Conta c = banco.get(i);
@@ -48,8 +47,8 @@ public class Main {
 			}
 		}
 		return -1;
-	} 
-	
+	}
+
 	public static void cadastrar(ArrayList<Conta> banco) { // Conta(String nome, String CPF, int dia, int mes, int ano)
 		String nome = Teclado.lerString("Digite o nome do titular: ");
 		String cpf = Teclado.lerString("Entre com o CPF do titular: ");
@@ -79,7 +78,7 @@ public class Main {
 			return;
 		}
 		int busca = Main.busca(banco, Teclado.lerInteiro("Digite o ID da conta que deseja excluir: "));
-		if(busca!=-1) {
+		if (busca != -1) {
 			banco.remove(busca);
 			System.out.println("Conta excluida com sucesso!");
 			return;
@@ -94,7 +93,7 @@ public class Main {
 			return;
 		}
 		int busca = Main.busca(banco, Teclado.lerInteiro("Digite o ID da conta que deseja alterar: "));
-		if(busca!=-1) {
+		if (busca != -1) {
 			Conta c = banco.get(busca);
 			c.setAgencia(Teclado.lerString("Digite a nova agência associada a essa conta: "));
 			System.out.println("Agência alterada com sucesso!");
@@ -109,26 +108,39 @@ public class Main {
 			System.out.printf("Banco de dados Vazio!\n\n");
 			return;
 		}
-		for (int i = 0; i < banco.size(); i++) {
-			Conta c = banco.get(i);
-
-			while (true) {
-				System.out.printf("1 - Deposito\n2 - Saque\n3 - Transferência\n4 - Rendimento");
-				int opcao = Teclado.lerInteiro("Digite a operação que deseja:");
-				switch (opcao) {
-				case 1:
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				case 4:
-					break;
-				case 0:
-					break;
-				default:
-					break;
+		int busca = Main.busca(banco, Teclado.lerInteiro("Digite o ID da conta que deseja movimentar: "));
+		if(busca==-1) {
+			System.out.println("Conta não encontrada, tente novamente!");
+			return;
+		}
+		while (true) {
+			Conta c = banco.get(busca);
+			System.out.printf("1 - Deposito\n2 - Saque\n3 - Transferência\n4 - Rendimento\n0 - Voltar ao menu principal\n");
+			int opcao = Teclado.lerInteiro("Digite a operação que deseja:");
+			switch (opcao) {
+			case 1:
+				c.deposito(Teclado.lerDouble("Digite o valor que deseja depositar: "));
+				break;
+			case 2:
+				c.saque(Teclado.lerDouble("Digite o valor que deseja sacar: "));
+				break;
+			case 3:
+				int busca2 = busca(banco, Teclado.lerInteiro("Digite o ID da conta que deseja fazer a tranferência:"));
+				if(busca2==-1||busca2==busca) {
+					System.out.println("Conta não encontrada, tente novamente!");
+					return;
 				}
+				Conta c2 = banco.get(busca2);
+				c.transferira(c2, Teclado.lerDouble("Digite o valor que deseja transferir"));
+				break;
+			case 4:
+				c.getRendimento();
+				break;
+			case 0:
+				System.out.println("Retornando ao menu principal");
+				return;
+			default:
+				break;
 			}
 		}
 	}
