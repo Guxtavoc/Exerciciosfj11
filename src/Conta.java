@@ -1,31 +1,32 @@
 public class Conta {
-
+	
+	private static int identificador = 0;
 	private String titular, agencia;
-	public String CPF;
 	private PessoaFisica detentor;
 	private Data dataAbertura = new Data();
-	private int numeroConta;
+	private int numeroConta,ID;
 	private double saldo = 0f;
-	private static int identificador = 0;
 
 	Conta(String nome, String CPF, int dia, int mes, int ano) {
-		identificador = Conta.setIdentificador();
-		this.titular = nome;
+		ID = Conta.setIdentificador();
+		titular = nome;
 		detentor = new PessoaFisica(titular, CPF, dia, mes, ano);
 		dataAbertura = Data.getData();
+		agencia = "Banco roxo";
 	}
 	public void imprimeCadastro() {
 		String data = Data.formataData(this.dataAbertura.dia, this.dataAbertura.mes, this.dataAbertura.ano);
 		System.out.println("Nome do Cliente: "+detentor.nome+"  || Cliente desde: "+data);
-		System.out.println("Agência: "+agencia+"  || Número da conta: "+numeroConta+"  || Saldo: "+saldo);
+		System.out.println("ID: "+this.ID+"  || Agência: "+agencia+"  || Número da conta: "+numeroConta+"  || Saldo: "+saldo);
 	}
+	
 	private static int setIdentificador() {
 		Conta.identificador++;
 		return identificador;
 	}
 
-	public void getIdentificador() {
-		System.out.println("O identificador dessa conta é: " + identificador);
+	public int getIdentificador() {
+		return this.identificador;
 	}
 
 
